@@ -375,6 +375,14 @@ cv::Mat sl::get_gray_image(const std::string & filename)
         return gray_image;
     }
     return cv::Mat();
+
+//    //edit by S.Sukprasertchai
+//        cv::Mat gray_image = cv::imread(filename);
+//        if (gray_image.rows>0 && gray_image.cols>0)
+//        {
+//            return gray_image;
+//        }
+//        return cv::Mat();
 }
 
 /*      From Wikipedia: http://en.wikipedia.org/wiki/Gray_code

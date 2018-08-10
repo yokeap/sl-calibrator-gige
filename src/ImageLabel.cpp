@@ -48,9 +48,9 @@ void ImageLabel::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
 
-    //if (_image.data && _image.type()==CV_8UC3)
+    if (_image.data && _image.type()==CV_8UC3)
     // edit by S.Sukprasertchai
-    if (_image.data && _image.type()==CV_8U)
+    //if (_image.data && _image.type()==CV_8U)
     {   //copy cv::Mat image
         _mutex.lock();
         _pixmap = QPixmap::fromImage(io_util::qImage(_image));

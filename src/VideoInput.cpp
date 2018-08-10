@@ -121,6 +121,7 @@ void VideoInput::run()
 
     // Create an OpenCV image
     cv::Mat openCvImage;
+    cv::Mat rgb_image;
 
     QTime timer;
     timer.start();
@@ -140,10 +141,10 @@ void VideoInput::run()
             //c_countOfImagesToGrab = 100;
 
             // Access the image data.
-            cout << "SizeX: " << ptrGrabResult->GetWidth() << endl;
-            cout << "SizeY: " << ptrGrabResult->GetHeight() << endl;
+            //cout << "SizeX: " << ptrGrabResult->GetWidth() << endl;
+            //cout << "SizeY: " << ptrGrabResult->GetHeight() << endl;
             const uint8_t *pImageBuffer = (uint8_t *) ptrGrabResult->GetBuffer();
-            cout << "Gray value of first pixel: " << (uint32_t) pImageBuffer[0] << endl << endl;
+            //cout << "Gray value of first pixel: " << (uint32_t) pImageBuffer[0] << endl << endl;
 
             // Convert the grabbed buffer to pylon imag
             formatConverter.Convert(pylonImage, ptrGrabResult);
@@ -153,7 +154,9 @@ void VideoInput::run()
 //            imshow("Test", openCvImage);
 //            cv::imwrite("/home/usa/Desktop/test.png", openCvImage);
 
-            emit new_image(openCvImage);
+            cv::cvtColor(openCvImage, rgb_image, CV_GRAY2BGR);
+
+            emit new_image(rgb_image);
 
 
         }

@@ -68,7 +68,7 @@ CaptureDialog::CaptureDialog(QWidget * parent, Qt::WindowFlags flags):
 //    CameraBrowser::instance()->start();
 
     update_screen_combo();
-    update_camera_combo();
+   update_camera_combo();
 
     projector_patterns_spin->setValue(APP->config.value("capture/pattern_count", 11).toInt());
     camera_exposure_spin->setMaximum(10000);
