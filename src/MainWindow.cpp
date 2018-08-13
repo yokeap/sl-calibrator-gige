@@ -210,10 +210,10 @@ void MainWindow::_on_image_tree_currentChanged(const QModelIndex & current, cons
     
     if (display_original_radio->isChecked())
     {
-        //image1 = app->get_image(level, row, ColorImageRole);
+        image1 = app->get_image(level, row, ColorImageRole);
 
         //edit by S.Sukprasertchai
-        image1 = app->get_image(level, row, GrayImageRole);
+        //image1 = app->get_image(level, row, GrayImageRole);
     }
 
     if (display_decoded_radio->isChecked() && app->pattern_list.size()>level)

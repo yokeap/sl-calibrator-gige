@@ -313,25 +313,6 @@ const cv::Mat Application::get_image(unsigned level, unsigned n, Role role) cons
         }
     }
 
-    //edit by S.Sukprasertchai
-//    cv::Mat image = cv::imread(filename.toStdString());
-//    if (image.rows>0 && image.cols>0)
-//    {
-//        //color
-//        if (role==ColorImageRole)
-//        {
-//            return image;
-//        }
-        
-//        //gray scale
-//        if (role==GrayImageRole)
-//        {
-//            //cv::Mat gray_image;
-//            //cvtColor(rgb_image, gray_image, CV_BGR2GRAY);
-//            return image;
-//        }
-//    }
-
     return cv::Mat();
 }
 
@@ -1141,10 +1122,10 @@ cv::Mat Application::get_projector_view(int level, bool force_update)
 
         cv::Mat pattern_image = pattern_list.at(level);
         cv::Mat min_max_image = min_max_list.at(level);;
-        //cv::Mat color_image = get_image(level, 0, ColorImageRole);
+        cv::Mat color_image = get_image(level, 0, ColorImageRole);
 
         //edit by S.Sukprasertchai
-        cv::Mat color_image = get_image(level, 0, GrayImageRole);
+        //cv::Mat color_image = get_image(level, 0, GrayImageRole);
         cv::Size projector_size(get_projector_width(), get_projector_height());
     
         projector_image = scan3d::make_projector_view(pattern_image, min_max_image, color_image, projector_size, threshold);

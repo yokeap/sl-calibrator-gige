@@ -68,9 +68,9 @@ CaptureDialog::CaptureDialog(QWidget * parent, Qt::WindowFlags flags):
 //    CameraBrowser::instance()->start();
 
     update_screen_combo();
-   update_camera_combo();
+    update_camera_combo();
 
-    projector_patterns_spin->setValue(APP->config.value("capture/pattern_count", 11).toInt());
+    projector_patterns_spin->setValue(APP->config.value("capture/pattern_count", 10).toInt());
     camera_exposure_spin->setMaximum(10000);
     camera_exposure_spin->setValue(APP->config.value("capture/exposure_time", 500).toInt());
     output_dir_line->setText(APP->get_root_dir());
@@ -81,6 +81,9 @@ CaptureDialog::CaptureDialog(QWidget * parent, Qt::WindowFlags flags):
 
     //update projector view
     _projector.set_screen(screen_combo->currentIndex());
+    _projector.set_pattern_count(projector_patterns_spin->value());
+    _projector.start();
+    _projector.stop();
 
     //start video preview
     start_camera();
@@ -460,6 +463,7 @@ void CaptureDialog::on_capture_button_clicked(bool checked)
     //open projector
     _projector.set_pattern_count(projector_patterns_spin->value());
     _projector.start();
+    _projector.clear_updated();
 
     //save projector resolution and settings
     _projector.save_info(QString("%1/projector_info.txt").arg(_session));
@@ -478,6 +482,7 @@ void CaptureDialog::on_capture_button_clicked(bool checked)
             QApplication::processEvents();
         }
 
+        wait(_wait_time);
         //capture
         _capture = true;
 
